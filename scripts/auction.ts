@@ -19,7 +19,6 @@ async function bid(userid: number,value: number) {
     const users = await ethers.getSigners();
     const user = users[userid];
     const contract = await ethers.getContractAt("Auction",ctadress,user);
-    
     try{
 
         let tx = await contract.bid({
@@ -73,9 +72,10 @@ async function getInformation() {
     }
 }
 async function main() {
-    // await bid(6,200);
+    //await bid(2,2);
     // await bid(1,3);
-    await claim(0);
+    //awati bid(3,4);
+    await claim(3);
     console.log("---------");
     await getInformation();
 }

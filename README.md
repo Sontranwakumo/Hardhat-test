@@ -1,20 +1,16 @@
-- Bài 2: Viết contract mua NFT
-  - Contract NFT 721
-  `Is nft721`
-  - Trong vòng 10 block, người dùng có quyền đấu giá mua NFT
-
-  - Người dùng đấu giá bằng ETH
-  - Ở block thứ 10, người dùng có giá trị đấu giá cao nhất sẽ được quyền claim NFT về ví mình
-  `Cứ 10 người `
-  - Nếu không có người dùng nào đấu giá, NFT sẽ được trả về cho owner.
-  `nghĩa là trong 10 block được thực hiện đó, không có ai đấu giá cả.`
-  - Vòng tiếp theo sẽ được bắt đầu sau khi người trước claim NFT hoặc NFT được trả về cho owner.
-  - Thời hạn bắt đầu tính từ block thứ 0 cho đấu giá là lúc contract được deploy.
-
-  Hành động bid.
-  Bid sẽ bị cấm nếu round đó đã kết thúc.
-  Round mới chỉ được tiếp theo sau khi người thắng claim NFT hoặc NFT trả về. Có nghĩa là hàm claim phải được gọi bởi người chủ sở hữu thì round tiếp theo mới bắt đầu được.
-
-  Trong logic, khi round bắt đầu, người sau phải trả giá cao hơn người trước.
-
-  Kiểm tra round kết thúc bằng những hàm hành động bên trong contract liên quan tới đặt cược. Vậy chỉ đơn giản kiểm tra nếu số block vượt quá end block là được.
+- Bài 3:
+  - Viết contract bán NFT theo giá bid:
+    + NFT Có thể là 1155 hoặc 721 
+     `Đầu tiên sẽ mint cho cả user1 và user2 một số`
+    + Sẽ có nhiều người được bán cùng lúc
+    + userA có NFT, muốn bán NFT theo cách đấu giá 
+    + userA nạp NFT vào sàn đấu giá, với giá min
+    + Có thời gian bắt đầu, kết thúc 
+    + Sau thời gian kết thúc:
+        - Nếu có người đấu giá, người đấu giá cao nhất có thể claim NFT
+        - Người bán NFT có thể claim tiền đã bán NFT
+        - Nếu không có người đấu giá, NFT sẽ được trả về cho người bán
+    + Người bán có thể hủy đấu giá trước thời gian kết thúc nếu không có người đấu giá, NFT sẽ đc trả về người bán 
+    + Admin có quyền hủy đấu giá bất kì lúc nào, NFT sẽ đc trả về người bán, người đã đấu giá sẽ được nhận lại tiền
+  - Vẽ diagram cho flow của contract
+  - Viết contract theo logic được vẽ từ diagram + unit test

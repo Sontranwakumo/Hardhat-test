@@ -27,7 +27,6 @@ contract NFT721 is ERC721, Ownable {
 }
 
 contract Auction is Ownable { 
-
     address public erc721;
     uint public _endblock;
     address public bestBider;
@@ -42,26 +41,31 @@ contract Auction is Ownable {
      * reset best bid
      * reset best value
      */
+    event StartNew(uint256 blockStart, uint256 blockEnd);
     function _startNew() internal {
-        _endblock = block.number+5;
+        _endblock = block.number+10;
         bestBider = address(0);
         bestValue = 0;
+
+        emit StartNew(block.number, _endblock);
     }
     /**
      * 
      */
     modifier bidable(){
-        require(msg.value>bestValue, "There is a higher bid");
         require(block.number<_endblock,"Session ended");
+        require(msg.value>bestValue, "There is a higher bid");
         _;
     }
 
+    event Bid(address bidder, uint256 value, uint256 biddedAt);
     function bid() external payable bidable{
         payable(bestBider).transfer(bestValue);
         bestBider = _msgSender();
         bestValue = msg.value;
-    }
 
+        emit Bid(msg.sender, msg.value, block.timestamp);
+    }
     modifier claimable(){
         require(block.number>=_endblock, "Round is not ended");
         require(msg.sender == bestBider|| (bestBider==address(0)&& msg.sender==owner()), "You are not winner");
@@ -79,13 +83,10 @@ contract Auction is Ownable {
     /**
      * 
      */
-    function withdraw() external onlyOwner returns(bool){
+    function withdraw() external onlyOwner{
         uint amount = address(this).balance - bestValue;
-        if (amount>0){
-            payable(owner()).transfer(amount);
-            return true;
-        }
-        else return false;
+        require(amount>0,"Withdraw fail");
+        payable(owner()).transfer(amount);
     }
 }
 

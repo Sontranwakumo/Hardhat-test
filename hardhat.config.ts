@@ -10,6 +10,12 @@ const config: HardhatUserConfig = {
     localhost: {
       url: 'http://localhost:8545/'
     },
+    eth: {
+      url: 'https://eth.llamarpc.com',
+      accounts: {
+        mnemonic: 'test test test test test test test test test test test junk'
+      }
+    }
   }
 };
 
