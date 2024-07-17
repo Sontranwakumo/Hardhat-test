@@ -1,0 +1,1 @@
+npx hardhat run $1 --network localhost
