@@ -1,6 +1,15 @@
 import { ethers } from "hardhat";
 import * as dotenv from "dotenv"; dotenv.config({path:"./.env"});
 
+/*
+
+NFT1155: 0x5FbDB2315678afecb367f032d93F642f64180aa3
+NFT721: 0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512
+Market: 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0
+user1: 0x70997970C51812dc3A010C7d01b50e0d17dc79C8
+
+*/
+
 
 async function main() {
 
@@ -18,7 +27,13 @@ async function main() {
     const market = await Market.deploy();
     console.log("Auction deployed to address:", market.target);
 
-    
+    // const blocknum = await deployer.provider.getBlockNumber();
+    // const block = await deployer.provider.getBlock(blocknum);
+    // const time = block?.timestamp;
+    // console.log(blocknum);
+    // console.log(time)
+
+    nft721B.mint(user1);
     // await nft721.setMinterRole(auction.target,true);
     // const hashTopics = ethers.id('Transfer(address,address,uint256)')
     // const filter = {
