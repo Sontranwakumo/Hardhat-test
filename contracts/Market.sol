@@ -8,17 +8,6 @@ import "@openzeppelin/contracts/token/ERC1155/utils/ERC1155Holder.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "hardhat/console.sol";
 
-/**
- * contract NFT {
- *
- *  NFT.connect(ownerNFT).approve(marketplace, tokenID)
- *
- * marketPlace.connect(ownerNFT).publish(NFT, tokenId)
- *  + NFT.connect(marketPlace).transferFrom(owerNFT, marketPlace, tokenId);
- *  +
- * }
- */
-
 
 enum TokenType {
     ERC721,
